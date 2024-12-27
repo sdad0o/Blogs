@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'descripttion', 'image', 'category_id', 'user_id'];
+    protected $fillable = ['title', 'description', 'image', 'category_id', 'user_id'];
 
     // one to many relation
     public function category()

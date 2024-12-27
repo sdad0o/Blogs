@@ -40,11 +40,11 @@
                     </ul>
 
 
-
-                    <!-- Add new blog -->
-                    <a href="#" class="btn btn-sm btn-primary mr-2">Add New</a>
-                    <!-- End - Add new blog -->
-
+                    @if (Auth::check())
+                        <!-- Add new blog -->
+                        <a href="{{ route('blogs.create') }}" class="btn btn-sm btn-primary mr-2">Add New</a>
+                        <!-- End - Add new blog -->
+                    @endif
                     <ul class="nav navbar-nav navbar-right navbar-social">
                         @if (!Auth::check())
                             <a href="{{ route('register') }}" class="btn btn-sm btn-warning">Register / Login</a>
