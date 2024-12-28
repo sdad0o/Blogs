@@ -21,7 +21,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -63,7 +63,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        return view('theme.singleblog',compact('blog'));
     }
 
     /**

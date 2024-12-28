@@ -22,14 +22,15 @@
                         <li class="nav-item @yield('home-active')"><a class="nav-link"
                                 href="{{ route('theme.index') }}">Home</a></li>
                         <li class="nav-item @yield('category-active') submenu dropdown">
-                            <a href="{{ route('theme.category') }}" class="nav-link dropdown-toggle"
+                            <a href="#" class="nav-link dropdown-toggle"
                                 data-toggle="dropdown" role="button" aria-haspopup="true"
                                 aria-expanded="false">Categories</a>
+
                             @if (count($headerCategory) > 0)
                                 <ul class="dropdown-menu">
                                     @foreach ($headerCategory as $category)
                                         <li class="nav-item"><a class="nav-link"
-                                                href="{{ route('theme.category') }}">{{ $category->name }}</a>
+                                                href="{{ route('theme.category', ['id' => $category->id]) }}">{{ $category->name }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
