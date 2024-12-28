@@ -33,7 +33,8 @@ Route::controller(ThemeController::class)->name('theme.')->group(function () {
 Route::post('/subscribe/store', [SubscriberController::class, 'store'])->name('subscriber.store');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 // Blog ROUTE
-Route::resource('blogs',BlogController::class);
+Route::get('/my-blogs', [BlogController::class, 'myBlogs'])->name('blogs.my-blogs');
+Route::resource('blogs', BlogController::class);
 
 
 Route::get('/dashboard', function () {

@@ -19,10 +19,7 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
@@ -51,11 +48,11 @@ class BlogController extends Controller
         $newImageName = time() . '-' . $image->getClientOriginalName();
         $image->storeAs('blogs', $newImageName, 'public');
         $data['image'] = $newImageName;
-        $data['user_id']=Auth::user()->id;
+        $data['user_id'] = Auth::user()->id;
 
         // create new record
         Blog::create($data);
-        return back()->with('blogCreateStatus','Blog created successfuly');
+        return back()->with('blogCreateStatus', 'Blog created successfuly');
     }
 
     /**
@@ -63,7 +60,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('theme.singleblog',compact('blog'));
+        return view('theme.singleblog', compact('blog'));
     }
 
     /**
@@ -88,5 +85,14 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+    }
+
+    public function myBlogs()
+    {
+        if (Auth::check()) {
+            $blogs = Blog::where('user_id', Auth::user()->id)->paginate(5);
+            return view('theme.blogs.my-blogs', compact('blogs'));
+        }
+        abort(403);
     }
 }
