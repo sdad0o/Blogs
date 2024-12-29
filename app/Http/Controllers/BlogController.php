@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -68,15 +70,33 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        if ($blog->user_id == Auth::user()->id) {
+            $categories = Category::get();
+            return view('theme.blogs.edit', compact('categories', 'blog'));
+        }
+        abort(403);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        //
+
+        if ($blog->user_id == Auth::user()->id) {
+            $data = $request->validated();
+            if ($request->hasFile('image')) {
+                Storage::delete("public/blogs/$blog->image");
+                $image = $request->image;
+                $newImageName = time() . '-' . $image->getClientOriginalName();
+                $image->storeAs('blogs', $newImageName, 'public');
+                $data['image'] = $newImageName;
+            }
+
+            $blog->update($data);
+            return back()->with('blogEditStatus', 'Blog updated successfuly');
+        }
+        abort(403);
     }
 
     /**
@@ -84,7 +104,12 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        if ($blog->user_id == Auth::user()->id) {
+            Storage::delete("public/blogs/$blog->image");
+            $blog->delete();
+            return back()->with('blogDeleteStatus', 'Blog deleted successfuly');
+        }
+        abort(403);
     }
 
     public function myBlogs()
