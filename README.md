@@ -6,20 +6,18 @@ A modern, feature-rich blogging platform built with **Laravel**, a powerful PHP 
 
 ## 🚀 Features
 
-- 🧑‍💻 **User Management**: Register, login, and manage user profiles.
+- 🧑‍💻 **User Management**: Register, login.
 - 🗂️ **Blog Categories**: Organize blog posts into categories for easy navigation.
 - ✍️ **Rich Content Creation**: Add blog posts with images, descriptions, and formatted content.
 - 💬 **Comments System**: Enable readers to engage with posts via comments.
 - 📧 **Subscriber Management**: Collect and manage email subscriptions for newsletters or updates.
-- 📬 **Contact Form**: Let users reach out via a simple and secure contact system.
-- 🔧 **Admin Panel**: Manage blogs, categories, users, and comments effortlessly.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Backend**: Laravel (PHP framework)
-- **Database**: MySQL or PostgreSQL
+- **Database**: MySQL
 - **Frontend**: Blade Templates, Bootstrap/CSS
 
 ---
