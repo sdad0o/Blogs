@@ -10,8 +10,9 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::paginate(4);
-        return view('theme.index', compact('blogs'));
+        $blogs = Blog::latest()->paginate(4);
+        $sliderBlogs = Blog::latest()->take(5)->get();
+        return view('theme.index', compact('blogs', 'sliderBlogs'));
     }
     public function category($id)
     {
@@ -23,7 +24,7 @@ class ThemeController extends Controller
     {
         return view('theme.contact');
     }
-    
+
     public function login()
     {
         return view('theme.login');
